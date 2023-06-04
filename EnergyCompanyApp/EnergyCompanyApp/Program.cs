@@ -12,7 +12,7 @@ WriteAllToConsole(employeeRepository);
 Console.WriteLine("\nClients:");
 WriteAllToConsole(clientRepository);
 
-static void AddEmployees(IRepository<Employee> employeeRepository) 
+static void AddEmployees(IRepository<Employee> employeeRepository)
 {
     employeeRepository.Add(new Employee { FirstName = "Alex", LastName = "Barecki", Branch = "Olsztyn" });
     employeeRepository.Add(new Employee { FirstName = "Barbara", LastName = "Koliczko", Branch = "Gdańsk" });
@@ -35,9 +35,10 @@ static void AddClients(IRepository<Client> clientRepository)
     clientRepository.Save();
 }
 
-static void WriteAllToConsole(IReadRepository<IEntity> repository) 
-{ 
+static void WriteAllToConsole(IReadRepository<IEntity> repository)
+{
     var items = repository.GetAll();
+    items = items.OrderBy(item => item.Id);
     foreach (var item in items)
     {
         Console.WriteLine(item);
